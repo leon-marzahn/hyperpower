@@ -143,6 +143,7 @@ exports.decorateTerm = (Term, { React, notify }) => {
         particle.x += particle.velocity.x;
         particle.y += particle.velocity.y;
         particle.alpha *= PARTICLE_ALPHA_FADEOUT;
+        if (particle.alpha < 0.1) particle.alpha = 0;
         this._canvasContext.fillStyle = `rgba(${particle.color.join(',')}, ${particle.alpha})`;
         this._canvasContext.fillRect(Math.round(particle.x - 1), Math.round(particle.y - 1), 3, 3);
       });
@@ -153,7 +154,6 @@ exports.decorateTerm = (Term, { React, notify }) => {
         window.requestAnimationFrame(this._drawFrame);
       }
       this.props.needsRedraw = this._particles.length === 0;
-      if (particle.alpha < 0.1) particle.alpha = 0;
     }
 
     // Pushes `PARTICLE_NUM_RANGE` new particles into the simulation.
