@@ -153,6 +153,7 @@ exports.decorateTerm = (Term, { React, notify }) => {
         window.requestAnimationFrame(this._drawFrame);
       }
       this.props.needsRedraw = this._particles.length === 0;
+      if (particle.alpha < 0.1) particle.alpha = 0;
     }
 
     // Pushes `PARTICLE_NUM_RANGE` new particles into the simulation.
